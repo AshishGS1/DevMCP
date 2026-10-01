@@ -3,6 +3,7 @@ from typing import Any
 from services import parse_guid
 from db import get_client
 from config import setting
+from qdrant_client.models import Filter, FilterSelector
 
 
 async def delete_rec(guid: str) -> dict[str,Any]:
@@ -22,3 +23,18 @@ async def delete_rec(guid: str) -> dict[str,Any]:
     )
     return {"guid": guid,
             "deleted": True}
+
+
+async def delete_all(confirm: bool) -> dict[str, Any]:
+    if confirm:
+        client = get_client()
+        client.delete(
+            collection_name = setting.collection,
+            points_selector = FilterSelector(filter=Filter),
+            wait=True
+        )
+        return {"confirm": confirm,
+                "deleted": True}
+    else:
+        return {"confirm": confirm,
+                "deleted": False}
