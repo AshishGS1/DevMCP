@@ -1,0 +1,17 @@
+# env / secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+
+# qdrant local storage
+qdrant_storage/
+
+# editor/OS cruft
+.vscode/
+.idea/
+.DS_Store

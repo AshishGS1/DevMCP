@@ -1,0 +1,11 @@
+fastmcp
+sentence-transformers
+qdrant-client
+pydantic-settings
+pydantic
+uuid
+
+
+#fastmcp run server.py --transport http --port 8002
+
+#npx clear-npx-cache && npx @modelcontextprotocol/inspector --server-url http://localhost:8002/mcp --transport http
