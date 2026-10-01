@@ -4,6 +4,7 @@ from services import embed, to_record
 from db import get_client
 from config import setting
 
+
 #similarity search on records based on query string
 async def simi_search(query: str, top_k: int =setting.top_k, thresh: float = setting.score_threshold) -> dict[str,Any]:
     """search top k similar records based on query."""

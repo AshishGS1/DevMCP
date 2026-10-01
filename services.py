@@ -18,9 +18,11 @@ async def embed(text:str) -> list[float]:
     vector = await asyncio.to_thread(model.encode, text, normalize_embeddings=True)
     return vector.tolist()
 
+
 #unique guid for each dev id in record, updates existing record if duplicate entry is made
-def guid_for_dev(id:int)->str:
-    return str(uuid.uuid5(DEV_NAMESPACE,f"dev:{id}"))
+def guid_for_dev(id:int)->uuid.UUID:
+    return uuid.uuid5(DEV_NAMESPACE,f"dev:{id}")
+
 
 def to_record(point: PointStruct, has_score: bool = False) -> dict[str, Any]:
     rec={"guid": str(point.id), **(point.payload or{})}
@@ -28,8 +30,9 @@ def to_record(point: PointStruct, has_score: bool = False) -> dict[str, Any]:
         rec["score"]=point.score
     return rec
 
-def parse_guid(val: str) -> str:
+
+def parse_guid(val: str) -> uuid.UUID:
     try:
-        return str(uuid.UUID(val))
+        return uuid.UUID(val)
     except (ValueError, AttributeError):
         raise ToolError(f"Invalid guid: {val}")
