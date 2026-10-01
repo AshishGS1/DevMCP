@@ -3,11 +3,11 @@ from db import lifespan
 from tools.insert import insert_rec
 from tools.fetch import get_rec, get_all_recs
 from tools.delete import delete_rec, delete_all
-from tools.search import simi_search
+from tools.search import simi_search, filter_recs
 from config import setting
 
 
-mcp=FastMCP("DevMCP",lifespan=lifespan, tools=[insert_rec, get_rec, get_all_recs, delete_rec, delete_all, simi_search])
+mcp=FastMCP("DevMCP",lifespan=lifespan, tools=[insert_rec, get_rec, get_all_recs, delete_rec, delete_all, simi_search, filter_recs])
 
 
 if __name__ == "__main__":
