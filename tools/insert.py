@@ -1,12 +1,13 @@
+from mcp_app import mcp
 from qdrant_client.models import PointStruct
 from fastmcp.exceptions import ToolError
 from models.developer import Dev
 from typing import Any
-from services import embed, get_embed_text, to_record, parse_guid, guid_for_dev
+from services import embed, get_embed_text, guid_for_dev
 from db import get_client
 from config import setting
 
-
+@mcp.tool(name= "Insert Records")
 async def insert_rec(dev: Dev) -> dict[str, Any]:
     """insert a developer record into the Devs collection. assigns unique guid."""
     name, role, description = dev.name.strip(), dev.role.strip(), dev.description.strip()
@@ -24,7 +25,9 @@ async def insert_rec(dev: Dev) -> dict[str, Any]:
     payload=dev.model_dump()
     await client.upsert(
         collection_name=setting.collection,
-        points=[PointStruct(id=guid, vector=vector, payload=payload)],
+        points=[PointStruct(id=guid, 
+                            vector=vector, 
+                            payload=payload)],
     )
     return {"guid": str(guid), **payload}
 
