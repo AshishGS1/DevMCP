@@ -7,7 +7,7 @@ from config import setting
 from qdrant_client.models import FieldCondition, MatchValue, Filter
 from models.developer import SimiSearchResponse, MultiRecResponse
 
-@mcp.tool(name= "Similarity Search")
+@mcp.tool(name= "SimilaritySearch")
 async def simi_search(query: str, 
                       top_k: int =setting.top_k, 
                       thresh: float = setting.score_threshold) -> SimiSearchResponse:
@@ -28,7 +28,7 @@ async def simi_search(query: str,
     return SimiSearchResponse(records= [to_record(p, has_score=True) for p in res.points],
                               count= len(res.points))
 
-@mcp.tool(name= "Filter Records")
+@mcp.tool(name= "FilterRecords")
 async def filter_recs(role: str | None = None, 
                       skills: list[str] | None = None, 
                       cursor: str | None = None) -> MultiRecResponse:

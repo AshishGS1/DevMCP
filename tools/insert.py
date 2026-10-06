@@ -7,7 +7,7 @@ from services import embed, get_embed_text, guid_for_dev
 from db import get_client
 from config import setting
 
-@mcp.tool(name= "Insert Records")
+@mcp.tool(name= "InsertRecords")
 async def insert_rec(dev: Dev) -> dict[str, Any]:
     """insert a developer record into the Devs collection. assigns unique guid."""
     name, role, description = dev.name.strip(), dev.role.strip(), dev.description.strip()

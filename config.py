@@ -1,6 +1,8 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
+    jwt_secret: str = "abcd123"
+
     qdrant_url: str = "http://localhost:6333"
     qdrant_api_key: str | None = None
     collection: str = "Devs"

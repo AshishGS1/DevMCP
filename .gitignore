@@ -15,3 +15,5 @@ qdrant_storage/
 .vscode/
 .idea/
 .DS_Store
+
+make_token.py

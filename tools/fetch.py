@@ -6,7 +6,7 @@ from db import get_client
 from config import setting
 from models.developer import MultiRecResponse
 
-@mcp.tool(name= "Get Record")
+@mcp.tool(name= "GetRecord")
 async def get_rec(guid: str) -> dict[str, Any]:
     """get a developer record from the Devs collection by guid."""
     guid = parse_guid(guid)
@@ -19,7 +19,7 @@ async def get_rec(guid: str) -> dict[str, Any]:
         raise ToolError(f"Record with guid '{guid}' not found.")
     return to_record(result[0])
 
-@mcp.tool(name= "Get All Records")
+@mcp.tool(name= "GetAllRecords")
 async def get_all_recs(cursor: str | None = None) -> MultiRecResponse:
     """get all records from Devs collection upto page size. returns next cursor if size exceeded"""
     offset= parse_guid(cursor) if cursor else None

@@ -6,7 +6,7 @@ from db import get_client
 from config import setting
 from qdrant_client.models import Filter, FilterSelector
 
-@mcp.tool(name= "Delete Records")
+@mcp.tool(name= "DeleteRecords")
 async def delete_rec(guid: str) -> dict[str,Any]:
     """delete a record by guid"""
     guid = parse_guid(guid)
@@ -16,7 +16,7 @@ async def delete_rec(guid: str) -> dict[str,Any]:
         ids=[guid]
     )
     if not res:
-        raise ToolError(f"Record with guid '{guid}' not found.")
+        raise ToolError(f"RecordWithGuid '{guid}' not found.")
     await client.delete(
         collection_name=setting.collection,
         points_selector=[guid],
@@ -25,8 +25,9 @@ async def delete_rec(guid: str) -> dict[str,Any]:
     return {"guid": guid,
             "deleted": True}
 
-@mcp.tool(name= "Delete All Records (!caution)")
+@mcp.tool(name= "DeleteAllRecords")
 async def delete_all(confirm: bool) -> dict[str, Any]:
+    """CAUTION: Deleting all records is irreversible"""
     if confirm:
         client = get_client()
         await client.delete(
